@@ -1,7 +1,7 @@
 {
   "name": "Arrival First Punctuality System",
   "short_name": "Arrival First",
-  "description": "A punctuality planner that calculates backwards from your target arrival time.",
+  "description": "A punctuality planner with reminder notifications.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0f172a" />
-  <meta name="description" content="Arrival First punctuality system app" />
+  <meta name="description" content="Arrival First punctuality system app with reminders" />
   <link rel="manifest" href="./manifest.json" />
   <link rel="apple-touch-icon" href="./icon-192.png" />
   <title>Arrival First</title>
   <style>
-    :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--dark:#020617;--soft:#f1f5f9;--green-bg:#dcfce7;--green:#166534;--red-bg:#fee2e2;--red:#991b1b;--amber-bg:#fef3c7}
+    :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--dark:#020617;--soft:#f1f5f9;--green-bg:#dcfce7;--green:#166534;--red-bg:#fee2e2;--red:#991b1b;--amber-bg:#fef3c7;--blue-bg:#e0f2fe;--blue:#0369a1}
     *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
     .app{width:min(100%,460px);margin:0 auto;padding:18px 14px 30px}.hero{background:var(--dark);color:white;padding:24px;border-radius:28px;box-shadow:0 16px 40px rgba(15,23,42,.16)}
     .hero-top{display:flex;justify-content:space-between;gap:16px;align-items:center}.kicker{color:#cbd5e1;margin:0;font-size:14px}h1{margin:6px 0 0;font-size:32px;line-height:1.05}
@@ -18,48 +18,156 @@
     .stat{text-align:center;padding:14px 8px}.stat strong{font-size:24px;display:block}.stat span{color:var(--muted);font-size:12px}.card{padding:18px;margin-top:14px}h2{font-size:18px;margin:0 0 14px}
     label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}input{width:100%;border:1px solid var(--line);border-radius:16px;padding:13px 14px;font-size:15px;outline:none;background:white;color:var(--ink)}
     input:focus{border-color:#94a3b8}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:11px}.full{grid-column:1/-1}
-    button{border:0;border-radius:16px;padding:13px 14px;font-size:14px;font-weight:650;cursor:pointer}.primary{width:100%;background:var(--dark);color:white;margin-top:14px;padding:15px}.secondary{background:var(--soft);color:var(--ink)}.danger{background:#fff1f2;color:#9f1239}
+    button{border:0;border-radius:16px;padding:13px 14px;font-size:14px;font-weight:650;cursor:pointer}.primary{width:100%;background:var(--dark);color:white;margin-top:14px;padding:15px}.secondary{background:var(--soft);color:var(--ink)}.danger{background:#fff1f2;color:#9f1239}.blue{background:var(--blue);color:white}
+    .notice{background:var(--blue-bg);border-radius:22px;padding:14px;font-size:14px;line-height:1.45;margin-top:14px}.notice strong{display:block;margin-bottom:3px}.notice .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
     .event{padding:18px;border-radius:28px;background:white;box-shadow:0 6px 22px rgba(15,23,42,.06);margin-top:14px}.event-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.event-title{font-size:18px;font-weight:750;margin:0}.event-time{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .badge{border-radius:999px;padding:7px 10px;font-size:12px;white-space:nowrap;background:var(--soft);color:var(--muted);font-weight:650}.badge.on-time{background:var(--green-bg);color:var(--green)}.badge.late{background:var(--red-bg);color:var(--red)}
+    .badge{border-radius:999px;padding:7px 10px;font-size:12px;white-space:nowrap;background:var(--soft);color:var(--muted);font-weight:650}.badge.on-time{background:var(--green-bg);color:var(--green)}.badge.late{background:var(--red-bg);color:var(--red)}.badge.notify{background:var(--blue-bg);color:var(--blue)}
     .deadline{background:var(--soft);border-radius:22px;padding:15px;margin-top:15px}.deadline small{color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:750;font-size:11px}.deadline-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.deadline-grid span{color:var(--muted);font-size:13px}.deadline-grid strong{display:block;font-size:24px;margin-top:2px}
     .timeline{margin-top:12px;display:grid;gap:8px}.timeline div{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:10px 12px;font-size:14px}
-    .actions{display:grid;grid-template-columns:1fr 1fr 44px;gap:8px;margin-top:13px}.rule{background:var(--amber-bg);line-height:1.55;font-size:14px}.empty{color:var(--muted);text-align:center;padding:24px 12px}
+    .actions{display:grid;grid-template-columns:1fr 1fr 44px;gap:8px;margin-top:13px}.reminder-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.rule{background:var(--amber-bg);line-height:1.55;font-size:14px}.empty{color:var(--muted);text-align:center;padding:24px 12px}
     .install{display:none;margin-top:14px;background:#e0f2fe;border-radius:22px;padding:14px;font-size:14px;line-height:1.45}.install button{margin-top:10px;background:#0369a1;color:white}
     @media(display-mode:standalone){.install{display:none!important}}
   </style>
 </head>
 <body>
   <main class="app">
-    <section class="hero"><div class="hero-top"><div><p class="kicker">Arrival First</p><h1>Punctuality System</h1></div><div class="clock-icon">⏰</div></div><p>Stop aiming to be exactly on time. Aim to arrive 15 minutes early, calculate backwards, and leave when the alarm says leave.</p></section>
+    <section class="hero"><div class="hero-top"><div><p class="kicker">Arrival First · V2</p><h1>Punctuality System</h1></div><div class="clock-icon">⏰</div></div><p>Plan backwards from your 15-minute early arrival target. Version 2 adds reminder notifications.</p></section>
     <section id="installBox" class="install"><strong>Install this app</strong><br>Add it to your home screen for quick access.<br><button id="installBtn">Install app</button></section>
+
+    <section class="notice">
+      <strong>Notifications</strong>
+      Status: <span id="notifyStatus">Checking...</span><br>
+      iPhone note: reminders work best when the app is open or recently active. For real alarm-style alerts, use Calendar reminders.
+      <div class="row">
+        <button class="blue" id="enableNotifyBtn">Enable</button>
+        <button class="secondary" id="testNotifyBtn">Test</button>
+      </div>
+    </section>
+
     <section class="stats"><div class="stat"><strong id="rate">0%</strong><span>on-time rate</span></div><div class="stat"><strong id="wins">0</strong><span>wins</span></div><div class="stat"><strong id="tracked">0</strong><span>tracked</span></div></section>
+
     <section class="card"><h2>Add event</h2><label for="title">Event name</label><input id="title" placeholder="e.g. Work meeting" />
       <div class="grid"><div><label for="startTime">Start time</label><input id="startTime" type="time" value="09:00" /></div><div><label for="travel">Travel minutes</label><input id="travel" type="number" value="20" min="0" /></div><div><label for="parking">Parking/walking</label><input id="parking" type="number" value="10" min="0" /></div><div><label for="buffer">Delay buffer</label><input id="buffer" type="number" value="15" min="0" /></div><div class="full"><label for="prep">Getting ready minutes</label><input id="prep" type="number" value="30" min="0" /></div></div>
       <button class="primary" id="addBtn">Create punctuality plan</button></section>
     <section id="events"></section>
     <section class="card rule"><h2>Hard rule</h2>When the Leave Now time arrives, you walk out. No extra message, no last scroll, no quick task. This is the rule that makes the system work.</section>
   </main>
+
   <script>
-    const storeKey="arrival-first-events-v1";
-    const defaultEvents=[{id:1,title:"Work meeting",startTime:"09:00",travel:25,parking:10,buffer:15,prep:30,status:"planned"},{id:2,title:"Coffee date",startTime:"18:30",travel:20,parking:5,buffer:15,prep:25,status:"planned"}];
-    let events=JSON.parse(localStorage.getItem(storeKey)||"null")||defaultEvents;let deferredPrompt=null;
+    const storeKey="arrival-first-events-v2";
+    const defaultEvents=[{id:1,title:"Work meeting",startTime:"09:00",travel:25,parking:10,buffer:15,prep:30,status:"planned",reminders:false},{id:2,title:"Coffee date",startTime:"18:30",travel:20,parking:5,buffer:15,prep:25,status:"planned",reminders:false}];
+    let events=JSON.parse(localStorage.getItem(storeKey)||"null")||defaultEvents;
+    let deferredPrompt=null;
+    let reminderTimers={};
+
     function save(){localStorage.setItem(storeKey,JSON.stringify(events))}
     function toMinutes(time){const[h,m]=time.split(":").map(Number);return h*60+m}
     function toTime(minutes){const safe=((minutes%1440)+1440)%1440;const h=Math.floor(safe/60);const m=safe%60;return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")}
     function plan(e){const start=toMinutes(e.startTime);const targetArrival=start-15;const leaveNow=targetArrival-Number(e.travel)-Number(e.parking)-Number(e.buffer);const prepStart=leaveNow-Number(e.prep);return{targetArrival:toTime(targetArrival),leaveNow:toTime(leaveNow),leaveWarning:toTime(leaveNow-10),noNewTask:toTime(leaveNow-20),prepStart:toTime(prepStart)}}
+    function dateForToday(time){const[h,m]=time.split(":").map(Number);const d=new Date();d.setHours(h,m,0,0);return d}
     function statusClass(status){if(status==="on-time")return"badge on-time";if(status==="late")return"badge late";return"badge"}
     function statusText(status){if(status==="on-time")return"On time";if(status==="late")return"Late";return"Planned"}
     function updateStats(){const completed=events.filter(e=>e.status!=="planned");const wins=completed.filter(e=>e.status==="on-time").length;const rate=completed.length?Math.round(wins/completed.length*100):0;document.getElementById("rate").textContent=rate+"%";document.getElementById("wins").textContent=wins;document.getElementById("tracked").textContent=completed.length}
     function escapeHtml(value){return String(value).replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[s]))}
-    function render(){updateStats();const box=document.getElementById("events");if(!events.length){box.innerHTML='<div class="card empty">No events yet. Add one above.</div>';return}
-      box.innerHTML=events.map(e=>{const p=plan(e);return `<article class="event"><div class="event-head"><div><p class="event-title">${escapeHtml(e.title)}</p><p class="event-time">Starts at ${e.startTime}</p></div><span class="${statusClass(e.status)}">${statusText(e.status)}</span></div><div class="deadline"><small>Your real deadline</small><div class="deadline-grid"><div><span>Arrive by</span><strong>${p.targetArrival}</strong></div><div><span>Leave now</span><strong>${p.leaveNow}</strong></div></div></div><div class="timeline"><div><span>⏱️ Start getting ready</span><strong>${p.prepStart}</strong></div><div><span>🚫 No new task after</span><strong>${p.noNewTask}</strong></div><div><span>🔔 Leave in 10 warning</span><strong>${p.leaveWarning}</strong></div></div><div class="actions"><button class="secondary" onclick="mark(${e.id}, 'on-time')">On time</button><button class="secondary" onclick="mark(${e.id}, 'late')">Late</button><button class="danger" onclick="removeEvent(${e.id})">🗑</button></div></article>`}).join("")}
-    function addEvent(){const title=document.getElementById("title").value.trim();if(!title)return;events.unshift({id:Date.now(),title,startTime:document.getElementById("startTime").value,travel:Number(document.getElementById("travel").value||0),parking:Number(document.getElementById("parking").value||0),buffer:Number(document.getElementById("buffer").value||0),prep:Number(document.getElementById("prep").value||0),status:"planned"});document.getElementById("title").value="";save();render()}
+
+    function notificationStatus(){
+      const el=document.getElementById("notifyStatus");
+      if(!("Notification" in window)){el.textContent="Not supported on this browser";return}
+      el.textContent=Notification.permission;
+    }
+
+    async function enableNotifications(){
+      if(!("Notification" in window)){alert("This browser does not support notifications.");return}
+      const permission=await Notification.requestPermission();
+      notificationStatus();
+      if(permission==="granted"){
+        notify("Arrival First notifications are on", "You can now schedule reminders for your events.");
+        rescheduleAll();
+      }
+    }
+
+    function notify(title, body){
+      if(!("Notification" in window) || Notification.permission!=="granted") return;
+      if(navigator.serviceWorker && navigator.serviceWorker.controller){
+        navigator.serviceWorker.ready.then(reg=>reg.showNotification(title,{body,icon:"./icon-192.png",badge:"./icon-192.png"}));
+      } else {
+        new Notification(title,{body,icon:"./icon-192.png"});
+      }
+    }
+
+    function clearReminders(id){
+      if(reminderTimers[id]){
+        reminderTimers[id].forEach(timer=>clearTimeout(timer));
+        delete reminderTimers[id];
+      }
+    }
+
+    function scheduleReminders(e){
+      clearReminders(e.id);
+      if(!e.reminders || !("Notification" in window) || Notification.permission!=="granted") return;
+
+      const p=plan(e);
+      const checks=[
+        {time:p.prepStart,title:"Start getting ready",body:`${e.title}: start preparing now.`},
+        {time:p.noNewTask,title:"No new task",body:`${e.title}: stop starting new tasks.`},
+        {time:p.leaveWarning,title:"Leave in 10 minutes",body:`${e.title}: leave soon.`},
+        {time:p.leaveNow,title:"Leave now",body:`${e.title}: walk out now.`}
+      ];
+
+      reminderTimers[e.id]=[];
+      const now=Date.now();
+
+      checks.forEach(item=>{
+        const due=dateForToday(item.time).getTime();
+        const delay=due-now;
+        if(delay>0 && delay<24*60*60*1000){
+          const timer=setTimeout(()=>notify(item.title,item.body),delay);
+          reminderTimers[e.id].push(timer);
+        }
+      });
+    }
+
+    function rescheduleAll(){
+      Object.keys(reminderTimers).forEach(id=>clearReminders(id));
+      events.forEach(e=>scheduleReminders(e));
+    }
+
+    function render(){
+      updateStats();notificationStatus();
+      const box=document.getElementById("events");
+      if(!events.length){box.innerHTML='<div class="card empty">No events yet. Add one above.</div>';return}
+      box.innerHTML=events.map(e=>{const p=plan(e);return `<article class="event"><div class="event-head"><div><p class="event-title">${escapeHtml(e.title)}</p><p class="event-time">Starts at ${e.startTime}</p></div><div><span class="${statusClass(e.status)}">${statusText(e.status)}</span>${e.reminders?'<br><br><span class="badge notify">Reminders on</span>':''}</div></div><div class="deadline"><small>Your real deadline</small><div class="deadline-grid"><div><span>Arrive by</span><strong>${p.targetArrival}</strong></div><div><span>Leave now</span><strong>${p.leaveNow}</strong></div></div></div><div class="timeline"><div><span>⏱️ Start getting ready</span><strong>${p.prepStart}</strong></div><div><span>🚫 No new task after</span><strong>${p.noNewTask}</strong></div><div><span>🔔 Leave in 10 warning</span><strong>${p.leaveWarning}</strong></div></div><div class="reminder-actions"><button class="blue" onclick="toggleReminders(${e.id})">${e.reminders?'Turn reminders off':'Turn reminders on'}</button><button class="secondary" onclick="testEventReminder(${e.id})">Test reminder</button></div><div class="actions"><button class="secondary" onclick="mark(${e.id}, 'on-time')">On time</button><button class="secondary" onclick="mark(${e.id}, 'late')">Late</button><button class="danger" onclick="removeEvent(${e.id})">🗑</button></div></article>`}).join("")
+    }
+
+    function addEvent(){const title=document.getElementById("title").value.trim();if(!title)return;const e={id:Date.now(),title,startTime:document.getElementById("startTime").value,travel:Number(document.getElementById("travel").value||0),parking:Number(document.getElementById("parking").value||0),buffer:Number(document.getElementById("buffer").value||0),prep:Number(document.getElementById("prep").value||0),status:"planned",reminders:false};events.unshift(e);document.getElementById("title").value="";save();render()}
     window.mark=function(id,status){events=events.map(e=>e.id===id?{...e,status}:e);save();render()}
-    window.removeEvent=function(id){events=events.filter(e=>e.id!==id);save();render()}
+    window.removeEvent=function(id){clearReminders(id);events=events.filter(e=>e.id!==id);save();render()}
+    window.toggleReminders=async function(id){
+      if(!("Notification" in window)){alert("Notifications are not supported on this browser.");return}
+      if(Notification.permission!=="granted"){
+        await enableNotifications();
+      }
+      events=events.map(e=>e.id===id?{...e,reminders:!e.reminders}:e);
+      save();
+      const event=events.find(e=>e.id===id);
+      if(event.reminders){scheduleReminders(event);notify("Reminders scheduled", `${event.title}: reminders are on for today.`)}
+      else{clearReminders(id)}
+      render();
+    }
+    window.testEventReminder=function(id){
+      const event=events.find(e=>e.id===id);
+      if(!event)return;
+      notify("Test reminder", `${event.title}: this is how your reminder will look.`);
+    }
+
     document.getElementById("addBtn").addEventListener("click",addEvent);
-    if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js"))}
+    document.getElementById("enableNotifyBtn").addEventListener("click",enableNotifications);
+    document.getElementById("testNotifyBtn").addEventListener("click",()=>notify("Arrival First test", "If you see this, notifications are working."));
+
+    if("serviceWorker"in navigator){window.addEventListener("load",async()=>{await navigator.serviceWorker.register("./service-worker.js");rescheduleAll();})}
     window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;document.getElementById("installBox").style.display="block"});
     document.getElementById("installBtn").addEventListener("click",async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById("installBox").style.display="none"});
+    document.addEventListener("visibilitychange",()=>{if(!document.hidden)rescheduleAll()});
     render();
   </script>
 </body>

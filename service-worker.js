@@ -1,4 +1,4 @@
-const CACHE_NAME = "arrival-first-no-folders-v1";
+const CACHE_NAME = "arrival-first-v2-notifications";
 const ASSETS = [
   "./",
   "./index.html",
@@ -24,4 +24,14 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request)));
+});
+
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  event.waitUntil(clients.matchAll({type: "window"}).then(clientList => {
+    for (const client of clientList) {
+      if ("focus" in client) return client.focus();
+    }
+    if (clients.openWindow) return clients.openWindow("./");
+  }));
 });

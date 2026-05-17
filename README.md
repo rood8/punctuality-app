@@ -1,8 +1,8 @@
-# Arrival First Punctuality System
+# Arrival First V2 - Notifications
 
-This version has no folders. Upload every file directly to the root of your GitHub repository.
+This is the no-folder GitHub Pages version.
 
-Files to upload:
+Upload every file directly to your repository root:
 
 - index.html
 - manifest.json
@@ -15,10 +15,19 @@ Then go to:
 
 Settings > Pages > Deploy from a branch > main > /(root)
 
-Your site link will look like:
+## What V2 adds
 
-https://YOUR-USERNAME.github.io/YOUR-REPOSITORY-NAME/
+- Notification permission button
+- Test notification button
+- Turn reminders on/off per event
+- Four reminder checkpoints:
+  - Start getting ready
+  - No new task
+  - Leave in 10 minutes
+  - Leave now
 
-On iPhone, open the link in Safari, then tap:
+## iPhone limitation
 
-Share > Add to Home Screen
+This PWA cannot create native iPhone Clock alarms.
+Notifications work best when the app is open or recently active.
+For stronger alarm-style reminders, use Calendar reminders in a future version.
