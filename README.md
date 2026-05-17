@@ -1,50 +1,24 @@
 # Arrival First Punctuality System
 
-A simple PWA for becoming punctual.
+This version has no folders. Upload every file directly to the root of your GitHub repository.
 
-## What it does
+Files to upload:
 
-- Calculates your target arrival time
-- Works backwards from the event start time
-- Shows when to start getting ready
-- Shows when to stop starting new tasks
-- Shows your real leave-now time
-- Tracks on-time and late outcomes
-- Works offline after first load
+- index.html
+- manifest.json
+- service-worker.js
+- icon-192.png
+- icon-512.png
+- README.md
 
-## How to publish on GitHub Pages
+Then go to:
 
-1. Create a new GitHub repository.
-2. Upload all files from this folder to the repository root.
-3. Go to **Settings**.
-4. Go to **Pages**.
-5. Under **Build and deployment**, choose:
-   - Source: **Deploy from a branch**
-   - Branch: **main**
-   - Folder: **/root**
-6. Click **Save**.
-7. Wait 1-3 minutes.
-8. Open the GitHub Pages link.
+Settings > Pages > Deploy from a branch > main > /(root)
 
-Your link will usually look like:
+Your site link will look like:
 
-`https://YOUR-USERNAME.github.io/YOUR-REPOSITORY-NAME/`
+https://YOUR-USERNAME.github.io/YOUR-REPOSITORY-NAME/
 
-## Install on phone
+On iPhone, open the link in Safari, then tap:
 
-### iPhone
-
-1. Open the GitHub Pages link in Safari.
-2. Tap **Share**.
-3. Tap **Add to Home Screen**.
-4. Tap **Add**.
-
-### Android
-
-1. Open the GitHub Pages link in Chrome.
-2. Tap the menu.
-3. Tap **Add to Home screen** or **Install app**.
-
-## Notes
-
-Your events are saved in the browser using local storage. They stay on your device/browser.
+Share > Add to Home Screen

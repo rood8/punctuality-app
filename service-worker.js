@@ -1,10 +1,11 @@
-const CACHE_NAME = "arrival-first-github-v1";
+const CACHE_NAME = "arrival-first-no-folders-v1";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./service-worker.js",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", event => {
